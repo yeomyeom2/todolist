@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Item from './component/Item';
+import Add from './component/Add';
+
+const App = () => {
+	const [status, setStatus] = useState('');
+	const addToggle = () => {
+		setStatus(status === '' ? 'on' : '');
+	};
+
+	return (
+		<div className="wrap">
+			<h1>Lista de quehaceres</h1>
+			<ul className="list-todo">
+				<Item index="1"></Item>
+				<Item index="2"></Item>
+			</ul>
+			<Add addStatus={status} />
+			<button type='button' onClick={addToggle}>+</button>
+		</div>
+	);
+};
 
 export default App;
