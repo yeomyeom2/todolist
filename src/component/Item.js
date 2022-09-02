@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Item = props => {
+const Item = ({ todo }) => {
 	return (
 		<li>
-			<input type="checkbox" name="check" id={'check_' + props.index} />
-			<label htmlFor={'check_' + props.index}>할 일 {props.index}</label>
+			<input type="checkbox" name="check" id={'check_' + todo.id} />
+			<label htmlFor={'check_' + todo.id}>{todo.text}</label>
 		</li>
 	);
 };

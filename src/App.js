@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Item from './component/Item';
+import List from './component/List';
 import Add from './component/Add';
 
 const App = () => {
@@ -9,13 +9,15 @@ const App = () => {
 		setStatus(status === '' ? 'on' : '');
 	};
 
+	const [todos, setTodos] = useState([
+		{id: '1', text: 'Estudiar español'},
+		{id: '2', text: 'Hacer ejercicio'}
+	]);
+
 	return (
 		<div className="wrap">
 			<h1>Lista de quehaceres</h1>
-			<ul className="list-todo">
-				<Item index="1"></Item>
-				<Item index="2"></Item>
-			</ul>
+			<List todos={todos} />
 			<Add addStatus={status} />
 			<button type='button' onClick={addToggle}>+</button>
 		</div>
