@@ -13,12 +13,15 @@ const App = () => {
 		{id: '1', text: 'Estudiar español'},
 		{id: '2', text: 'Hacer ejercicio'}
 	]);
+	console.log(todos)
+
+	const [aa, setAa] = useState('');
 
 	return (
 		<div className="wrap">
 			<h1>Lista de quehaceres</h1>
 			<List todos={todos} />
-			<Add addStatus={status} />
+			<Add addStatus={status} setTodos={setTodos} todos={todos} />
 			<button type='button' onClick={addToggle}>+</button>
 		</div>
 	);
