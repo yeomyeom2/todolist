@@ -15,8 +15,6 @@ const App = () => {
 	]);
 	console.log(todos)
 
-	const [aa, setAa] = useState('');
-
 	return (
 		<div className="wrap">
 			<h1>Lista de quehaceres</h1>
