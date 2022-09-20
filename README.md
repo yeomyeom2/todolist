@@ -38,13 +38,6 @@ push 외 원본 배열 변경 함수: pop, splice, sort 등<br>
 출처: https://chanie.tistory.com/6
 
 
-useRef Hook은 DOM을 선택하는 용도 외에도, 다른 용도가 한가지 더 있습니다.
-바로, 컴포넌트 안에서 조회 및 수정할 수 있는 변수를 관리하는 것입니다. 
- 
-useRef 로 관리하는 변수는 값이 바뀐다고 해서 컴포넌트가 리렌더링되지 않습니다. 리액트 컴포넌트에서의 상태는 상태를 바꾸는 함수를 호출하고 나서 그 다음 렌더링 이후로 업데이트 된 상태를 조회 할 수 있는 반면, useRef 로 관리하고 있는 변수는 설정 후 바로 조회 할 수 있습니다.
-
-출처: https://bbangson.tistory.com/66 [뺑슨 개발 블로그:티스토리]
-
 # HOOK
 
 ## useState
@@ -95,3 +88,52 @@ useEffect(() => {
 	};
 }, []);
 ~~~
+
+## useReducer
+* useState보다 더 다양한 컴포넌트 상황에 따 다양한 상태를 다른 값으로 업데이트 할 때 사용
+* useReducer의 첫번째 파라미터에는 리듀서 함수, 두번째 파라미터에는 해당 리듀서의 기본값 입력
+* 이 Hook 사용 시 state 값(현재 가리키고 있는 상태), dispatch 함수(액션을 발생시키는 함수)를 받아옴
+* 함수 안에 파라미터로 액션 값을 넣어주면 리듀서 함수 호출
+~~~
+const [state, dispath] = useReducer(reducer, {
+	name: '',
+	nickname: ''
+});
+~~~
+
+## useMemo
+* 함수 컴포넌트 내부에서 발생하는 연산을 최적화
+* memo = memoization 해서 렌더링 될 때마다 실행 X, 기존에 연산된 값을 재사용 
+* 렌더링하는 과정에서 특정 값이 바뀌었을 때만 연산을 실행, 원하는 값이 바뀌지 않았다면 이전 결과를 다시 사용
+~~~
+const avg = useMemo(() => {
+	console.log('첫번째 파라미터: 콜백함수, 두번째 파라미터: 의존성 배열 / 빈 배열을 넘겨주면 마운트 될 때만 계산');
+}, []);
+~~~
+
+## useCallback
+* useMemo와 유사, 함수 재사용
+~~~
+const onChange = useCallback(e => {
+	console.log('첫번째 파라미터: 생성하고 싶은 함수, 두번째 파라미터: 배열');
+}, []); //컴포넌트가 처음 렌더링 될때만 함수 생성
+
+const onChange = useCallback(e => {
+
+}, [number, list]); //number 혹은 list가 바뀌었을 때만 함수 생성
+~~~
+
+## useRef
+* 함수 컴포넌트에서 ref를 쉽게 사용할 수 있도록 함
+* 추가로 컴포넌트 로컬 변수를 사용해야 할 때에도 사용(로컬 변수란 렌더링과 상관없이 바뀔 수 있는 값)
+* useRef 로 관리하는 변수는 값이 바뀐다고 해서 컴포넌트가 리렌더링되지 않습니다. 리액트 컴포넌트에서의 상태는 상태를 바꾸는 함수를 호출하고 나서 그 다음 렌더링 이후로 업데이트 된 상태를 조회 할 수 있는 반면, useRef 로 관리하고 있는 변수는 설정 후 바로 조회 할 수 있습니다.
+~~~
+const inputEl = useRef();
+<input ref={inputEl} />
+
+const id = useRef(1);
+const setId = (n) => {
+	id.current = n;
+};
+~~~
+
